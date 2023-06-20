@@ -24,11 +24,104 @@ import LMS.provided.*;
  * </ul>
  *
  */
-public abstract class Delivery
+public abstract class Delivery implements Comparable<Delivery>{
 
-		
+	private Vehicle carrier;
+	private DateTime collected;
+	private DateTime delivered;
+	private String from;
+	private Set<Item> goods = new HashSet<>();
 
-{
+	private long id;
+	private String to;
+
+	public Delivery(long id, String from, String to){
+		if (id > 0 && ensureNonNullNonEmpty(from) != null && ensureNonNullNonEmpty(to) != null){
+			this.id = id;
+			this.from = from;
+			this.to = to;
+		}else{
+			throw new IllegalArgumentException();
+		}
+	}
+
+	public abstract int getTotal();
+
+	protected final float totalMass(){
+		float totalMass = 0;
+		for ( Item i : goods ){
+			totalMass += i.totalMass();
+		}
+		return totalMass;
+	}
+
+	public boolean isCollected(){
+		return collected != null;
+	}
+
+	public boolean isDelivered(){
+		return delivered != null;
+	}
+
+	private boolean isAssigned(){
+		return carrier != null;
+	}
+
+	public final boolean addGoods(Item item){
+		if (!isAssigned() && !isCollected() && !isDelivered()){
+			return goods.add(item);
+		}
+		return false;
+	}
+
+	public final boolean addGoods(Iterable<Item> items){
+		if (!isAssigned() && !isCollected() && !isDelivered()) {
+			for (Item i : items) {
+				if (!goods.contains(i)){
+					return addGoods(i);
+				}
+			}
+		}
+		return false;
+	}
+
+	public Set<Item> getGoods() {
+		return goods = new HashSet<>(goods);
+	}
+
+	public final void assignCarrier(Vehicle v){
+		if (v != null && totalMass() < v.getMaxLoad()) {
+			carrier = v;
+		}
+	}
+
+	public final boolean collect(DateTime toc){
+		if (!isCollected() && carrier != null && goods != null){
+			collected = new DateTime(toc);
+			return true;
+		}
+		return false;
+	}
+
+	public final boolean deliver(DateTime tod){
+		if (isCollected() && !isDelivered()){
+			delivered = new DateTime(tod);
+			return true;
+		}
+		return false;
+	}
+
+	public int compareTo(Delivery arg0){
+		return Long.compare(id, arg0.id);
+	}
+
+	private final String ensureNonNullNonEmpty(String str){
+		if (str != null && !str.isEmpty()){
+			return str;
+		}else {
+			throw new IllegalArgumentException();
+		}
+	}
 
 	
 

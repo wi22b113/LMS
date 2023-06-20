@@ -10,8 +10,30 @@ package LMS.entities;
  *
  */
 public class Item {
-	
 
+	private int amount;
+	private String description;
+	private float mass;
+	private long value;
+
+	public Item(String description, int amount, float mass, long value) {
+		if (amount > 0 &&  mass > 0.0 && value > 0 ) {
+			this.amount = amount;
+			this.description = description;
+			this.mass = mass;
+			this.value = value;
+		}else {
+			throw new IllegalArgumentException("The values mus t be greater than zero");
+		}
+	}
+
+	public float totalValue(){
+		return value * amount;
+	}
+
+	public float totalMass(){
+		return mass * amount;
+	}
 	/**
 	 * creates a string representation of this item.<br>
 	 * 

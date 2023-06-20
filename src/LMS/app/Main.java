@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import LMS.entities.*;
 import LMS.provided.*;
@@ -17,6 +18,7 @@ import LMS.util.*;
  */
 public class Main {
 	private static List<Delivery> deliveries;
+
 	static {
 		// ------- items
 		LinkedList<Item> items = new LinkedList<>();
@@ -41,7 +43,7 @@ public class Main {
 		deliveries = new LinkedList<>();
 
 		// ---
-		Delivery d = new InterationalDelivery(120120210L, "Europe Storage", "Austria Storage");
+		Delivery d = new InterationalDelivery(220120210L, "Europe Storage", "Austria Storage");
 		d.addGoods(items);
 		d.assignCarrier(vehicles.get(0));
 		d.collect(new DateTime(2018, 7, 1, 15, 15));
@@ -55,7 +57,7 @@ public class Main {
 
 	/**
 	 * Demo application.
-	 * 
+	 *
 	 * <ul>
 	 * <li>prints the test data using {@link print}</li>
 	 * <li>sorts them by delivery id</li>
@@ -65,17 +67,45 @@ public class Main {
 	 * <li>exports the filtered deliveries to file deliveries_on_route.txt and
 	 * displays the number of deliveries exported
 	 * </ul>
-	 * 
+	 *
 	 * @param args
 	 *             (not used)
 	 */
 	public static void main(String[] args) {
 
 		print(deliveries);
-		
+
+		List<Delivery> sortedDeliveries = deliveries.stream().sorted().collect(Collectors.toList());
+		print(sortedDeliveries);
+
+		OnRouteMatcher m = new OnRouteMatcher();
+		//List<Delivery> filteredDeliveries = deliveries.stream().filter(d -> m.matches(d)).collect(Collectors.toList());
+		List<Delivery> filteredDeliveries = filter(deliveries,m);
+		print(filteredDeliveries);
+
+		export(filteredDeliveries,"deliveries_on_route.txt");
+
 	}
 
-	
+	static int export(java.util.Collection<Delivery> deliveries, String filename){
+		int sucExports = 0;
+		try(BufferedWriter writer = new BufferedWriter(new FileWriter(filename))){
+			for (Delivery d : deliveries) {
+				writer.write(d.toString());
+				writer.newLine();
+				sucExports++;
+			}
+		} catch (IOException e){
+			System.out.println("export failed");
+		}
+		return sucExports;
+	}
+
+	public static <T> java.util.List<T> filter(java.util.List<T> list, Matcher<? super T> m){
+
+		return list.stream().filter(e -> m.matches(e)).collect(Collectors.toList());
+	}
+
 
 	/**
 	 * Prints deliveries line by line.<br>
@@ -84,10 +114,10 @@ public class Main {
 	 * deliveries line by line. For a single delivery the standard string
 	 * representation provided by Delivery.toString() is used.<br>
 	 * <br>
-	 * 
+	 *
 	 * @param deliveries
 	 *                   the deliveries to print.
-	 * 
+	 *
 	 * @ProgrammingProblem.Hint provided
 	 */
 	public static void print(Collection<Delivery> deliveries) {
