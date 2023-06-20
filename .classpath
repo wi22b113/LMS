@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/TeM/GIT/JavaCourse/JAVA_OOP-BeispielSammlung/LMS/libs/bsh-2.0b4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TeM/GIT/JavaCourse/JAVA_OOP-BeispielSammlung/LMS/libs/guava-base-r03.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TeM/GIT/JavaCourse/JAVA_OOP-BeispielSammlung/LMS/libs/guava-collections-r03.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TeM/GIT/JavaCourse/JAVA_OOP-BeispielSammlung/LMS/libs/jcommander.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TeM/GIT/JavaCourse/JAVA_OOP-BeispielSammlung/LMS/libs/plantuml.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TeM/GIT/JavaCourse/JAVA_OOP-BeispielSammlung/LMS/libs/snakeyaml.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TeM/GIT/JavaCourse/JAVA_OOP-BeispielSammlung/LMS/libs/support.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TeM/GIT/JavaCourse/JAVA_OOP-BeispielSammlung/LMS/libs/testng.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TeM/GIT/JavaCourse/JAVA_OOP-BeispielSammlung/LMS/libs/testng-remote.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TeM/GIT/JavaCourse/JAVA_OOP-BeispielSammlung/LMS/libs/testng-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TeM/GIT/JavaCourse/JAVA_OOP-BeispielSammlung/LMS/libs/umldoclet-2.0.0-alpha.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TeM/GIT/JavaCourse/JAVA_OOP-BeispielSammlung/LMS/libs/javapp-0.4/javapp.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
