@@ -78,9 +78,10 @@ public abstract class Delivery implements Comparable<Delivery>{
 		if (!isAssigned() && !isCollected() && !isDelivered()) {
 			for (Item i : items) {
 				if (!goods.contains(i)){
-					return addGoods(i);
+					addGoods(i);
 				}
 			}
+			return true;
 		}
 		return false;
 	}
