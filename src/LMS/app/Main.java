@@ -76,12 +76,12 @@ public class Main {
 		print(deliveries);
 
 		List<Delivery> sortedDeliveries = deliveries.stream().sorted().collect(Collectors.toList());
-		//print(sortedDeliveries);
+		print(sortedDeliveries);
 
 		OnRouteMatcher m = new OnRouteMatcher();
 		//List<Delivery> filteredDeliveries = deliveries.stream().filter(d -> m.matches(d)).collect(Collectors.toList());
 		List<Delivery> filteredDeliveries = filter(deliveries,m);
-		//print(filteredDeliveries);
+		print(filteredDeliveries);
 
 		export(filteredDeliveries,"deliveries_on_route.txt");
 
